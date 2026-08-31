@@ -1,0 +1,6 @@
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import { CuratedProductGrid, EditorialBreak, EditorialListingHero } from "@/components/curated-listing";
+import { getCollection } from "@/data/collections";
+import { products } from "@/data/products";
+export default async function CollectionPage({ params }: { params: Promise<{slug:string}> }) { const {slug}=await params; const collection=getCollection(slug); if(!collection) notFound(); const items=products.filter(product=>collection.productIds.includes(product.id)); const isSoft=collection.slug==="soft-neutrals"; return <><EditorialListingHero eyebrow="The NORDLY edit" title={collection.name} copy={isSoft?"Familiar materials, softened edges, and a palette designed to linger beyond the season.":collection.description} image={collection.heroImage} position={collection.imagePosition}>{isSoft&&<div className="hero-hotspots"><span>Arne Lounge Chair <b>$895</b></span><span>Copenhagen Table Lamp <b>$129</b></span></div>}</EditorialListingHero><CuratedProductGrid items={items} heading="Shop the edit"/>{isSoft&&<EditorialBreak title="Room to exhale." copy="Natural tones, warm light, and tactile materials create spaces that feel settled rather than styled." image="/images/collections/soft-neutrals.png" reverse/>}</>; }

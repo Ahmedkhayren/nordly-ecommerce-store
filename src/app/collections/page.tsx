@@ -1,0 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { collections } from "@/data/collections";
+export default function CollectionsPage() { return <section className="collections-page page"><div className="collections-intro"><p className="eyebrow">Curated for living</p><h1>Collections</h1><p>Explore curated edits shaped by material, mood, and the way a room comes together.</p></div><div className="collection-directory">{collections.map((collection, index)=><article className={`collection-card collection-card-${index}`} key={collection.slug}><Image src={collection.heroImage} alt={collection.name} fill sizes="(max-width: 700px) 100vw, 50vw" loading={index < 2 ? "eager" : "lazy"} style={{objectFit:"cover",objectPosition:collection.imagePosition}}/><div><p className="eyebrow">Collection 0{index+1}</p><h2>{collection.name}</h2><p>{collection.description}</p><Link href={`/collections/${collection.slug}`} className="text-link">Explore collection <ArrowUpRight size={15}/></Link></div></article>)}</div></section>; }
