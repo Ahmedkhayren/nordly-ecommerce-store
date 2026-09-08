@@ -2,3 +2,16 @@ node_modules/
 .next/
 *.tsbuildinfo
 .DS_Store
+
+# environment files
+.env
+.env.local
+.env.*.local
+.env.local.save
+!.env.example
+
+# deployment
+.vercel/
+
+# logs
+*.log
